@@ -1,13 +1,13 @@
 # Specify the Wi-Fi SSID (network name) you want to trigger on
-$expectedWifi = "WohnhausEG"  # Replace with your Wi-Fi network name
+$expectedWifi = "Your Wifi Name"  # Replace with your Wi-Fi network name
 
 # Define the path to the log file on the desktop
 $desktopPath = [System.Environment]::GetFolderPath("Desktop")
 $logFile = Join-Path -Path $desktopPath -ChildPath "wifi_connection_log.txt"
 
 # Define the source and destination for the backup
-$sourcePath = "C:\Backuptest"  # Source path (C drive)
-$destinationPath = "D:\Backup"  # Destination path (external drive)
+$sourcePath = "C:\Your\Prefferd\Storage\Path"  # Source path (C drive)
+$destinationPath = "D:\Your\path\where\backup\is\stored"  # Destination path (external drive)
 
 # Continuously check for the Wi-Fi connection
 while ($true) {
