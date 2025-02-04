@@ -1,0 +1,48 @@
+Prerequisites:
+
+Your script (.ps1) is already saved, and you have adjusted the paths to the script as well as the Wi-Fi name (SSID) in your PowerShell script, such as:
+
+    Wi-Fi Name: The value $expectedWifi = "Your Wifi" must match the actual name of your Wi-Fi network.
+    Backup Path: The source and destination paths in the script must also be adjusted to the correct folders on your system.
+
+Steps to set up via MMC with Group Policy
+
+    Open MMC (Microsoft Management Console) and add the "Group Policy Object" Snap-In:
+        Press Windows key + R, type mmc, and press Enter.
+        In the MMC window, click on File > Add/Remove Snap-in.
+        Select Group Policy Object Editor from the list and click Add.
+        Click OK.
+
+    Choose the appropriate Group Policy Object:
+        If you want to create a new group policy for a specific user group, you can do so directly in Active Directory or for the local computer.
+        In MMC, click on Group Policy Object and then click Edit to configure the GPO for the user or computer.
+        To run the script at login, select User Settings.
+
+    Navigate to the User Configuration Settings:
+        In the Group Policy Editor, navigate to:
+
+    User Configuration > Windows Settings > Scripts (Logon/Logoff)
+        In the right pane, click Logon.
+        In the window that appears, you can now add a script.
+
+    Add the PowerShell script for logon:
+        Click Add, then click Browse.
+        Navigate to the location of your .ps1 file (e.g., C:\Path\to\your\BackupScript.ps1).
+        Click Open.
+
+And as arguments, enter the following command:
+
+-ExecutionPolicy Bypass -File "C:\Path\to\your\BackupScript.ps1"
+
+    Save and Close:
+        Click OK to add the script.
+        Close the Group Policy Editor and save the changes.
+
+    Update Group Policy:
+        To apply the changes immediately, either restart the computer or run the command gpupdate /force in an administrative command prompt.
+
+Important Notes:
+
+    Adjust Wi-Fi name: In the script itself, ensure that the $expectedWifi value matches the name of your Wi-Fi network. If you're connected to a different network, the script will not execute the backup operation.
+    Adjust Backup Paths: Make sure the paths for the sourcePath and destinationPath are set correctly. For example, if the source directory points to C:\Backuptest, make sure the folder exists. The same applies to the destination folder on the external hard drive (D:\Backup).
+    Execution Policies: The argument -ExecutionPolicy Bypass allows the PowerShell script to run even if local execution policies for PowerShell scripts are restricted.
